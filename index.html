@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+	
+    <title>TypeScript Electron application template</title>
+	
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="app.css">
+
+		<script src="vue.js"></script>
+	
+  </head>
+  
+  <body>
+
+	<div id="app">			
+
+	<div class="outergridcontainer">
+		<div class="gridcontainer">
+			<div class="griditem propcaption griditem1">
+				{{projectnamecaption}}				
+			</div>
+			<div class="griditem propinput griditem2">
+				<input class="form-control form-control propinput" v-model="projectname">
+			</div>
+			<div class="griditem propcaption griditem3">
+				{{projectdirectorycaption}}				
+			</div>
+			<div class="griditem propinput griditem4">
+				<input class="form-control form-control propinput" v-model="projectdirectory">
+			</div>
+			<div class="griditem propcaption griditem5">
+				{{projectdescriptioncaption}}
+			</div>
+			<div class="griditem propinput griditem6">
+				<input class="form-control form-control propinput" v-model="projectdescription">
+			</div>
+			<div class="griditem propcaption griditem7">
+				{{projectkeywordscaption}}				
+			</div>
+			<div class="griditem propinput griditem8">
+				<input class="form-control form-control propinput" v-model="projectkeywords">
+			</div>
+			<div class="griditem propcaption griditem9">
+				{{projectlicencecaption}}				
+			</div>
+			<div class="griditem propinput griditem10">
+				<input class="form-control form-control propinput" v-model="projectlicence">
+			</div>
+			<div class="griditem propcaption griditem11">
+				{{githubusercaption}}				
+			</div>
+			<div class="griditem propinput griditem12">
+				<input class="form-control form-control propinput" v-model="githubuser">
+			</div>
+			<div class="griditem propcaption griditem13">
+				{{githubrepocaption}}				
+			</div>
+			<div class="griditem propinput griditem14">
+				<input class="form-control form-control propinput" v-model="githubrepo">
+			</div>
+			<div class="griditem propcaption griditem15">
+				{{githubusermailcaption}}
+			</div>
+			<div class="griditem propinput griditem16">
+				<input class="form-control form-control propinput" v-model="githubusermail">
+			</div>
+			<div class="griditem propcaption griditem17">
+				{{projectauthorcaption}}				
+			</div>
+			<div class="griditem propinput griditem18">
+				<input class="form-control form-control propinput" v-model="projectauthor">
+			</div>
+			<div class="griditem propcaption griditem19">
+				{{projectnotecaption}}
+			</div>
+			<div class="griditem propinput griditem20">
+				<input class="form-control form-control propinput" v-model="projectnote">
+			</div>
+			<div class="griditem propcaption griditem21">
+				<input type="button" value="Select Python Path" style="margin-top:-1px;padding-top:0px;padding-bottom:0px;" onclick="mainProcess.selectPythonPath()">
+			</div>
+			<div class="griditem propinput griditem22" style="padding-top:7px;">
+				<span class="badge-pill badge-secondary">{{pythonPath}}</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="outergridcontainer" style="margin-top: 5px;">
+		<div id="buildlog"/>
+	</div>
+
+	<script>
+
+		const electron = require('electron')
+		const remote = electron.remote
+		const mainProcess = remote.require('./main')		
+		const ipcRenderer = electron.ipcRenderer
+
+		let app={
+			_data:{				
+				pythonPath:"?",					
+
+				projectnamecaption:"Project Name",
+				projectname:"TypeScript Electron application template",				
+
+				projectdirectorycaption:"Project Directory",
+				projectdirectory:"telectron",				
+
+				projectdescriptioncaption:"Project Description",
+				projectdescription:"TypeScript Electron application template.",							
+
+				projectkeywordscaption:"Keywords",
+				projectkeywords:"TypeScript Electron application template",				
+
+				projectlicencecaption:"Licence",
+				projectlicence:"MIT",				
+
+				githubusercaption:"GitHub User",
+				githubuser:"typescriptelectron",				
+
+				githubrepocaption:"GitHub Repo",
+				githubrepo:"typescriptelectron",				
+
+				githubusermailcaption:"GitHub User Email",
+				githubusermail:"typescriptelectron@gmail.com",				
+				
+				projectauthorcaption:"Author",				
+				projectauthor:"TypeScript Electron",				
+
+				projectnotecaption:"Note",				
+				projectnote:"...",				
+			}
+		}
+
+		app = new Vue(				
+			{
+				el: '#app',
+				data:app._data,
+				watch:{					
+					projectname:val=>sendConfig(),
+					projectdirectory:val=>sendConfig(),
+					projectdescription:val=>sendConfig(),
+					projectkeywords:val=>sendConfig(),
+					projectlicence:val=>sendConfig(),
+					githubuser:val=>sendConfig(),
+					githubrepo:val=>sendConfig(),
+					githubusermail:val=>sendConfig(),					
+					projectauthor:val=>sendConfig(),
+					projectnote:val=>sendConfig(),
+					pythonPath:val=>sendConfig(),
+				}					
+			}
+		)
+
+		function sendConfig(){
+			let config={}
+			for(key in app._data){
+				config[key]=app._data[key]
+			}				
+			ipcRenderer.send("configchanged",config)
+		}
+
+		ipcRenderer.on('setConfig', (event, config) => {				
+			for(key in config){
+				app._data[key]=config[key]
+			}				
+		})
+
+		ipcRenderer.on('setBuildLog', (event, content) => {				
+			document.querySelector("#buildlog").innerHTML=content
+		})
+
+	</script>
+
+  </body>
+  
+</html>

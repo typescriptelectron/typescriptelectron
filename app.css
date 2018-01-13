@@ -1,0 +1,151 @@
+:root {
+	--propcaptionwidth: 200px;
+	--propinputwidth: 265px;
+	--gridrowheight: 35px;
+	--griditemfontsize: 16px;
+	--gridcontainerbcol: #de9;
+	--gridgap: 5px;
+}
+
+body {
+	padding: 10px;
+}
+
+.propcaption {
+	padding-left: 12px;
+	padding-top: 3px;
+	font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	color: #222;
+	font-weight: bold;
+	font-size: var(--griditemfontsize);	
+	border-style: solid;
+	border-color: #222;
+	border-width: 1px;
+	border-radius: 10px;
+}
+
+.propinput {
+	padding: 3px;
+}
+
+.propstable {
+	border-style: solid;
+	border-width: 1px;
+}
+
+#buildlog {
+	padding:5px;
+	height: 315px;
+	overflow: scroll;
+	font-family: monospace;
+	background-color: #ffa;
+}
+
+.gridcontainer {
+	display: grid;
+	grid-template-columns: var(--propcaptionwidth) var(--propinputwidth) var(--propcaptionwidth) var(--propinputwidth);
+	grid-template-rows: var(--gridrowheight) var(--gridrowheight) var(--gridrowheight) var(--gridrowheight) var(--gridrowheight) var(--gridrowheight) var(--gridrowheight);
+	grid-gap: var(--gridgap);
+	background-color: var(--gridcontainerbcol);
+}
+
+.outergridcontainer {
+	background-color: var(--gridcontainerbcol);
+	padding: var(--gridgap);
+	border-style: solid;
+	border-color: #222;
+	border-width: 1px;
+	border-radius: 10px;
+}
+
+.griditem {
+	background-color: blanchedalmond;	
+}
+
+.griditem1 {
+	grid-area: 1 / 1 / 1 / 2;	
+}
+
+.griditem2 {
+	grid-area: 1 / 2 / 1 / 3;	
+}
+
+.griditem3 {
+	grid-area: 1 / 3 / 1 / 4;	
+}
+
+.griditem4 {
+	grid-area: 1 / 4 / 1 / 5;
+}
+
+.griditem5 {
+	grid-area: 2 / 1 / 2 / 2;	
+}
+
+.griditem6 {
+	grid-area: 2 / 2 / 2 / 5;	
+}
+
+.griditem7 {
+	grid-area: 3 / 1 / 3 / 2;	
+}
+
+.griditem8 {
+	grid-area: 3 / 2 / 3 / 3;	
+}
+
+.griditem9 {
+	grid-area: 3 / 3 / 3 / 4;	
+}
+
+.griditem10 {
+	grid-area: 3 / 4 / 3 / 5;
+}
+
+.griditem11 {
+	grid-area: 4 / 1 / 4 / 2;	
+}
+
+.griditem12 {
+	grid-area: 4 / 2 / 4 / 3;	
+}
+
+.griditem13 {
+	grid-area: 4 / 3 / 4 / 4;	
+}
+
+.griditem14 {
+	grid-area: 4 / 4 / 4 / 5;
+}
+
+.griditem15 {
+	grid-area: 5 / 1 / 5 / 2;	
+}
+
+.griditem16 {
+	grid-area: 5 / 2 / 5 / 5;	
+}
+
+.griditem17 {
+	grid-area: 6 / 1 / 6 / 2;	
+}
+
+.griditem18 {
+	grid-area: 6 / 2 / 6 / 3;	
+}
+
+.griditem19 {
+	grid-area: 6 / 3 / 6 / 4;	
+}
+
+.griditem20 {
+	grid-area: 6 / 4 / 6 / 5;
+}
+
+.griditem21 {
+	grid-area: 7 / 1 / 7 / 2;	
+}
+
+.griditem22 {
+	grid-area: 7 / 2 / 7 / 5;	
+}
